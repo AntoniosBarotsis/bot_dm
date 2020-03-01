@@ -2,16 +2,16 @@ module.exports = {
     name: 'data',
     description: 'reterns pure data',
     execute(message, args) {
-        
+
         async function func() {
 
-            if (!message.member.hasPermission("ADMINISTRATOR")){
+            if (!message.member.hasPermission("ADMINISTRATOR")) {
                 message.reply("You dont have Admin perms")
                 return;
             }
 
             const guildMembers = await message.guild.fetchMembers()
-            
+
             var users = guildMembers.members.array().filter(users => users.user.bot === false && users._roles.length === 0 && !users.deleted)
 
             console.log("\nSending messages...\n")
@@ -26,8 +26,8 @@ module.exports = {
             console.log("\nDone")
             message.channel.send(`Done`)
         }
-            
+
         func();
-        
+
     },
 };

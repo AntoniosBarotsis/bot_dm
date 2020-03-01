@@ -10,13 +10,13 @@ client.commands = new Discord.Collection()
 
 
 
-for (const file of commandFiles) {                  
-	const command = require(`./commands/${file}`)
-	client.commands.set(command.name, command)
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`)
+    client.commands.set(command.name, command)
 }
 
 client.once('ready', () => {
-	console.log(`Logged in as ${client.user.tag}`)
+    console.log(`Logged in as ${client.user.tag}`)
     client.user.setActivity(`${prefix} 😳`)
 })
 
@@ -24,21 +24,21 @@ client.on('error', m => logger.log('error', m))
 
 client.on('message', message => {
 
-	if (!message.content.startsWith(prefix) || message.author.bot){
-		return;
-	}
+    if (!message.content.startsWith(prefix) || message.author.bot) {
+        return;
+    }
 
-	let args = message.content.substring(prefix.length).split(" ");
-	const command = args.shift().toLowerCase();
+    let args = message.content.substring(prefix.length).split(" ");
+    const command = args.shift().toLowerCase();
 
-	if (!client.commands.has(command)) return;
+    if (!client.commands.has(command)) return;
 
-	try {
-		client.commands.get(command).execute(message, args);
-	} catch (error) {
-		console.error(error);
-		message.reply('Bruh??');
-	}
+    try {
+        client.commands.get(command).execute(message, args);
+    } catch (error) {
+        console.error(error);
+        message.reply('Bruh??');
+    }
 })
 
 client.login(token);
