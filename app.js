@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const fs = require('fs')
 require('dotenv').config();
 
-const prefix = require('./config.json')
+const { prefix } = require('./config.json')
 const token = process.env.token
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
 const client = new Discord.Client()
@@ -30,7 +30,7 @@ client.on('message', message => {
 
     let args = message.content.substring(prefix.length).split(" ");
     const command = args.shift().toLowerCase();
-
+console.log(message)
     if (!client.commands.has(command)) return;
 
     try {
@@ -41,4 +41,5 @@ client.on('message', message => {
     }
 })
 
+console.log(prefix)
 client.login(token);
